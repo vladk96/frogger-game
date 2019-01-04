@@ -10,6 +10,18 @@ const BORDER_FIELD = {
     yMin: 0
 }
 
+const ENEMY_INIT_POS = {
+    x: -50,
+    y1: 210,
+    y2: 130,
+    y3: 60,
+}
+
+const ENEMY_SIZE = {
+    x: 60,
+    y: 70
+}
+
 const STEP = {
     x: 100,
     y: 50
@@ -48,8 +60,8 @@ Enemy.prototype.update = function(dt) {
 }
 
 Enemy.prototype.handlesCollision = function() {
-    if (this.player.x < this.x + 60 && this.x < this.player.x + 65 &&
-        this.player.y < this.y + 70 && this.y < this.player.y + 75) {
+    if (this.player.x < this.x + ENEMY_SIZE.x && this.x < this.player.x + ENEMY_SIZE.x &&
+        this.player.y < this.y + ENEMY_SIZE.y && this.y < this.player.y + ENEMY_SIZE.y) {
         showMessage(false);
         this.player.toInitialPosition(PLAYER_INIT_POS.x, PLAYER_INIT_POS.y);
     }
@@ -97,10 +109,10 @@ const showMessage = function(boolean) {
     boolean ? alert('You won!') : alert('You lost!');
 }
 
-const player = new Player(PLAYER_INIT_POS.x, PLAYER_INIT_POS.y);
-const enemy1 = new Enemy(-50, 210, getRandomNumber(), player);
-const enemy2 = new Enemy(-50, 130, getRandomNumber(), player);
-const enemy3 = new Enemy(-50, 60, getRandomNumber(), player);
+const player = new Player(PLAYER_INIT_POS.x, PLAYER_INIT_POS.y),
+      enemy1 = new Enemy(ENEMY_INIT_POS.x, ENEMY_INIT_POS.y1, getRandomNumber(), player),
+      enemy2 = new Enemy(ENEMY_INIT_POS.x, ENEMY_INIT_POS.y2, getRandomNumber(), player),
+      enemy3 = new Enemy(ENEMY_INIT_POS.x, ENEMY_INIT_POS.y3, getRandomNumber(), player);
 
 const allEnemies = [enemy1, enemy2, enemy3];
 
